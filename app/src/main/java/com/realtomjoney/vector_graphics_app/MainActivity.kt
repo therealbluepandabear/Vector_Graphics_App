@@ -1,9 +1,12 @@
 package com.realtomjoney.vector_graphics_app
 
+import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.animation.LinearInterpolator
 import com.realtomjoney.vector_graphics_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,13 +17,14 @@ class MainActivity : AppCompatActivity() {
         setBindings()
 
         binding.view.setOnClickListener {
-            val tX = ValueAnimator.ofFloat(0f, 200f)
-            val duration = 5000 // Milliseconds
-            tX.addUpdateListener { animation ->
-                animation.duration = duration.toLong()
-                binding.view.translationX = animation.animatedValue as Float
-            }
-            tX.start()
+            val tY = ObjectAnimator.ofFloat(
+                binding.view,
+                View.TRANSLATION_Y,
+                binding.view.translationY,
+                binding.view.translationY + 100f)
+            tY.duration = 500
+            tY.interpolator = LinearInterpolator()
+            tY.start();
         }
     }
 
