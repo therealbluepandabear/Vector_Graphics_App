@@ -15,8 +15,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.view.setOnClickListener {
             val tX = ValueAnimator.ofFloat(0f, 200f)
-            val duration = 1000 // Milliseconds
+            val duration = 5000 // Milliseconds
             tX.addUpdateListener { animation ->
+                animation.duration = duration.toLong()
                 binding.view.translationX = animation.animatedValue as Float
             }
             tX.start()
