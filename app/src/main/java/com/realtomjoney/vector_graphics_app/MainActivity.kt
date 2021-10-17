@@ -1,5 +1,7 @@
 package com.realtomjoney.vector_graphics_app
 
+import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.realtomjoney.vector_graphics_app.databinding.ActivityMainBinding
@@ -10,6 +12,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setBindings()
+
+        binding.view.setOnClickListener {
+            val tX = ValueAnimator.ofFloat(0f, 200f)
+            val duration = 1000 // Milliseconds
+            tX.addUpdateListener { animation ->
+                binding.view.translationX = animation.animatedValue as Float
+            }
+            tX.start()
+        }
     }
 
     private fun setBindings() {
