@@ -1,5 +1,6 @@
 package com.realtomjoney.vector_graphics_app
 
+import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
@@ -10,6 +11,7 @@ import android.util.Property
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
+import android.widget.Toast
 import com.realtomjoney.vector_graphics_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,31 +22,32 @@ class MainActivity : AppCompatActivity() {
         setBindings()
 
         binding.view.setOnClickListener {
-            animate(
-                binding.view,
-                View.TRANSLATION_Y,
-                binding.view.translationY,
-                binding.view.translationY + 100,
-                1000,
-                DecelerateInterpolator())
-        }
-    }
+            val scaleX = ObjectAnimator.ofFloat(binding.view, View.SCALE_X, 1.0f, 0.0f)
+            scaleX.duration = 2000
+            scaleX.start()
 
-    fun animate(
-        target: View,
-        property: Property<View, Float>,
-        from: Float,
-        to: Float,
-        duration: Long,
-        interpolator: TimeInterpolator) {
-        val tY = ObjectAnimator.ofFloat(
-            target,
-            property,
-            from,
-            to)
-        tY.duration = duration
-        tY.interpolator = interpolator
-        tY.start();
+            scaleX.addListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Animation Ended",
+                        Toast.LENGTH_LONG).show()
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onAnimationRepeat(animation: Animator?) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }
     }
 
     private fun setBindings() {
