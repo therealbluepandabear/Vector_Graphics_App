@@ -22,31 +22,7 @@ class MainActivity : AppCompatActivity() {
         setBindings()
 
         binding.view.setOnClickListener {
-            val scaleX = ObjectAnimator.ofFloat(binding.view, View.SCALE_X, 1.0f, 0.0f)
-            scaleX.duration = 2000
-            scaleX.start()
 
-            scaleX.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onAnimationEnd(animation: Animator?) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Animation Ended",
-                        Toast.LENGTH_LONG).show()
-                }
-
-                override fun onAnimationCancel(animation: Animator?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onAnimationRepeat(animation: Animator?) {
-                    TODO("Not yet implemented")
-                }
-
-            })
         }
     }
 
